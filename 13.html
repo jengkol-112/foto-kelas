@@ -1,0 +1,397 @@
+<!doctype html>
+<html lang="id" class="h-full">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galeri Foto Kenangan</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+        body {
+            box-sizing: border-box;
+        }
+        
+        .photo-card {
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .photo-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+        /* Modal fade & slide */
+        
+        .modal {
+            backdrop-filter: blur(10px);
+            animation: fadeIn 0.4s ease;
+        }
+        
+        .modal-content {
+            animation: slideUp 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+        
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(60px) scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+        /* Heart animation */
+        
+        .heart-animation {
+            animation: softBeat 0.6s ease-in-out;
+        }
+        
+        @keyframes softBeat {
+            0% {
+                transform: scale(1);
+            }
+            30% {
+                transform: scale(1.4);
+            }
+            60% {
+                transform: scale(0.9);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+        /* Hover & like transitions */
+        
+        .navbar-icon {
+            transition: transform 0.2s ease, color 0.2s ease;
+        }
+        
+        .navbar-icon:hover {
+            transform: scale(1.1);
+            color: #2563eb;
+        }
+        
+        .like-count {
+            transition: color 0.3s ease, transform 0.2s ease;
+        }
+        
+        .like-count.updated {
+            color: #dc2626;
+            transform: scale(1.1);
+        }
+    </style>
+</head>
+
+<body class="h-full bg-gray-50 font-sans">
+    <div class="min-h-full">
+        <!-- Header -->
+        <header class="bg-white shadow-sm border-b border-gray-200">
+            <div class="max-w-4xl mx-auto px-4 py-4">
+                <div class="flex items-center space-x-4">
+                    <img src="https://4.bp.blogspot.com/-TuUVfDF157w/VE698LUR6WI/AAAAAAAAHnk/6KLxg7i25NI/s1600/monkey%2Bwallpaper%2Bhd%2B-%2Bwww.binatang.mewarnaigambar.web.id.jpg" alt="Profile Picture" class="w-16 h-16 rounded-full shadow-lg object-cover">
+                    <div>
+                        <h1 class="text-xl font-bold text-gray-900">memories_gallery</h1>
+                        <p class="text-gray-600 text-sm">Koleksi momen berharga yang tak terlupakan</p>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main -->
+        <main class="max-w-4xl mx-auto px-4 py-6">
+            <div class="text-center text-gray-600 mb-8">
+                Koleksi momen berharga yang tak terlupakan
+            </div>
+
+            <div class="space-y-8">
+                <!-- Template Post -->
+                <article class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
+                    <div class="flex items-center justify-between p-4">
+                        <div class="flex items-center space-x-3">
+                            <img src="https://4.bp.blogspot.com/-TuUVfDF157w/VE698LUR6WI/AAAAAAAAHnk/6KLxg7i25NI/s1600/monkey%2Bwallpaper%2Bhd%2B-%2Bwww.binatang.mewarnaigambar.web.id.jpg" alt="User Avatar" class="w-10 h-10 rounded-full object-cover">
+                            <div>
+                                <h3 class="font-semibold text-gray-900">memories_gallery</h3>
+                                <p class="text-sm text-gray-500">Pantai Kuta, Bali</p>
+                            </div>
+                        </div>
+                        <button class="text-gray-500 hover:text-gray-700">⋯</button>
+                    </div>
+
+                    <img src="c:\Users\Dell\Downloads\foto aku.jpeg" alt="Pantai Kuta, Bali" class="aspect-square cursor-pointer object-cover w-full" onclick="openModal(0)">
+
+                    <div class="p-4">
+                        <div class="flex items-center justify-between mb-3">
+                            <div class="flex items-center space-x-4">
+                                <button class="like-btn navbar-icon" onclick="toggleLike(this, 0)" aria-label="Suka">
+                  <span class="heart text-2xl">🤍</span>
+                </button>
+                                <button class="navbar-icon text-2xl" onclick="openModal(0)" aria-label="Komentar">💬</button>
+                                <button class="navbar-icon text-2xl" aria-label="Bagikan">📤</button>
+                            </div>
+                            <button class="navbar-icon text-2xl" aria-label="Simpan">🔖</button>
+                        </div>
+
+                        <div class="mb-2"><span class="like-count font-semibold text-gray-900">24 suka</span></div>
+                        <div class="mb-2">
+                            <span class="font-semibold text-gray-900">memories_gallery</span>
+                            <span class="text-gray-700 ml-2">Liburan pantai yang tak terlupakan! Matahari, pasir, dan ombak yang
+                menenangkan 🌊☀️</span>
+                        </div>
+                        <button class="text-gray-500 text-sm mb-2" onclick="openModal(0)">Lihat semua 8 komentar</button>
+                        <div class="text-xs text-gray-400 uppercase">2 hari yang lalu</div>
+                    </div>
+                </article>
+
+                <!-- Post kedua contoh -->
+                <article class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
+                    <div class="flex items-center justify-between p-4">
+                        <div class="flex items-center space-x-3">
+                            <img src="foto2.jpg.jpeg" alt="User Avatar" class="w-10 h-10 rounded-full object-cover">
+                            <div>
+                                <h3 class="font-semibold text-gray-900">memories_gallery</h3>
+                                <p class="text-sm text-gray-500">Gunung Bromo, Jawa Timur</p>
+                            </div>
+                        </div>
+                        <button class="text-gray-500 hover:text-gray-700">⋯</button>
+                    </div>
+
+                    <img src="https://via.placeholder.com/600x600/F59E0B/FFFFFF?text=🌋+Gunung+Bromo" alt="Gunung Bromo" class="aspect-square cursor-pointer object-cover w-full" onclick="openModal(1)">
+
+                    <div class="p-4">
+                        <div class="flex items-center justify-between mb-3">
+                            <div class="flex items-center space-x-4">
+                                <button class="like-btn navbar-icon" onclick="toggleLike(this, 1)" aria-label="Suka">
+                  <span class="heart text-2xl">🤍</span>
+                </button>
+                                <button class="navbar-icon text-2xl" onclick="openModal(1)" aria-label="Komentar">💬</button>
+                                <button class="navbar-icon text-2xl" aria-label="Bagikan">📤</button>
+                            </div>
+                            <button class="navbar-icon text-2xl" aria-label="Simpan">🔖</button>
+                        </div>
+
+                        <div class="mb-2"><span class="like-count font-semibold text-gray-900">42 suka</span></div>
+                        <div class="mb-2">
+                            <span class="font-semibold text-gray-900">memories_gallery</span>
+                            <span class="text-gray-700 ml-2">Menyambut matahari terbit di Bromo — pengalaman magis! 🌄</span>
+                        </div>
+                        <button class="text-gray-500 text-sm mb-2" onclick="openModal(1)">Lihat semua 12 komentar</button>
+                        <div class="text-xs text-gray-400 uppercase">5 hari yang lalu</div>
+                    </div>
+                </article>
+                <article class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
+                    <div class="flex items-center justify-between p-4">
+                        <div class="flex items-center space-x-3">
+                            <img src="foto3.jpeg">
+                            <div>
+                                <h3 class="font-semibold text-gray-900">memories_gallery</h3>
+                                <p class="text-sm text-gray-500">Pantai Kuta, Bali</p>
+                            </div>
+                        </div>
+                        <button class="text-gray-500 hover:text-gray-700">⋯</button>
+                    </div>
+
+                    <img src="foto3.jpeg" alt="Pantai Kuta, Bali" class="aspect-square cursor-pointer object-cover w-full" onclick="openModal(0)">
+
+                    <div class="p-4">
+                        <div class="flex items-center justify-between mb-3">
+                            <div class="flex items-center space-x-4">
+                                <button class="like-btn navbar-icon" onclick="toggleLike(this, 0)" aria-label="Suka">
+                  <span class="heart text-2xl">🤍</span>
+                </button>
+                                <button class="navbar-icon text-2xl" onclick="openModal(0)" aria-label="Komentar">💬</button>
+                                <button class="navbar-icon text-2xl" aria-label="Bagikan">📤</button>
+                            </div>
+                            <button class="navbar-icon text-2xl" aria-label="Simpan">🔖</button>
+                        </div>
+
+                        <div class="mb-2"><span class="like-count font-semibold text-gray-900">24 suka</span></div>
+                        <div class="mb-2">
+                            <span class="font-semibold text-gray-900">memories_gallery</span>
+                            <span class="text-gray-700 ml-2">Liburan pantai yang tak terlupakan! Matahari, pasir, dan ombak yang
+                menenangkan 🌊☀️</span>
+                        </div>
+                        <button class="text-gray-500 text-sm mb-2" onclick="openModal(0)">Lihat semua 8 komentar</button>
+                        <div class="text-xs text-gray-400 uppercase">2 hari yang lalu</div>
+                    </div>
+                </article>
+            </div>
+        </main>
+
+        <!-- Modal -->
+        <div id="photo-modal" class="modal fixed inset-0 bg-black bg-opacity-90 hidden z-50 flex items-center justify-center p-4">
+            <div class="modal-content bg-white rounded-2xl max-w-2xl w-full max-h-full overflow-y-auto shadow-2xl relative">
+                <!-- Tombol Close -->
+                <button onclick="closeModal()" class="absolute top-4 right-4 text-gray-500 hover:text-gray-700 text-2xl z-10 bg-white rounded-full w-10 h-10 flex items-center justify-center shadow-md">✕</button>
+
+                <!-- Tombol navigasi -->
+                <button onclick="prevPhoto()" class="absolute left-4 top-1/2 -translate-y-1/2 text-white text-4xl font-bold bg-black/30 hover:bg-black/50 rounded-full w-12 h-12 flex items-center justify-center transition">
+          ◀
+        </button>
+                <button onclick="nextPhoto()" class="absolute right-4 top-1/2 -translate-y-1/2 text-white text-4xl font-bold bg-black/30 hover:bg-black/50 rounded-full w-12 h-12 flex items-center justify-center transition">
+          ▶
+        </button>
+
+                <!-- Konten -->
+                <div>
+                    <div class="flex items-center justify-between p-4 border-b border-gray-200">
+                        <div class="flex items-center space-x-3">
+                            <img id="modal-avatar" src="" alt="User Avatar" class="w-10 h-10 rounded-full object-cover">
+                            <div>
+                                <h3 class="font-semibold text-gray-900">memories_gallery</h3>
+                                <p id="modal-location" class="text-sm text-gray-500">Lokasi</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <img id="modal-photo" src="" alt="Post Image" class="aspect-square object-cover w-full">
+
+                    <div class="p-4">
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="flex items-center space-x-4">
+                                <button id="modal-like-btn" class="like-btn navbar-icon" onclick="toggleModalLike()" aria-label="Suka">
+                  <span class="heart text-2xl">🤍</span>
+                </button>
+                                <button class="navbar-icon text-2xl" aria-label="Komentar">💬</button>
+                                <button class="navbar-icon text-2xl" aria-label="Bagikan">📤</button>
+                            </div>
+                            <button class="navbar-icon text-2xl" aria-label="Simpan">🔖</button>
+                        </div>
+
+                        <div class="mb-3"><span id="modal-likes" class="like-count font-semibold text-gray-900">0 suka</span></div>
+                        <div class="mb-4">
+                            <span class="font-semibold text-gray-900">memories_gallery</span>
+                            <span id="modal-caption" class="text-gray-700 ml-2">Caption foto</span>
+                        </div>
+
+                        <div id="comments-section" class="border-t pt-4">
+                            <div id="comments-list" class="space-y-3 mb-4 max-h-60 overflow-y-auto"></div>
+                            <div class="flex space-x-3 border-t pt-3">
+                                <input type="text" id="comment-input" placeholder="Tambahkan komentar..." class="flex-1 border-none outline-none text-sm">
+                                <button onclick="addComment()" class="text-blue-500 font-semibold text-sm hover:text-blue-600">Kirim</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const posts = [{
+            id: "post_1",
+            location: "Pantai Kuta, Bali",
+            image: "https://4.bp.blogspot.com/-TuUVfDF157w/VE698LUR6WI/AAAAAAAAHnk/6KLxg7i25NI/s1600/monkey%2Bwallpaper%2Bhd%2B-%2Bwww.binatang.mewarnaigambar.web.id.jpg",
+            caption: "Liburan pantai yang tak terlupakan! Matahari, pasir, dan ombak yang menenangkan 🌊☀️",
+            likes: 24,
+            liked: false,
+            avatar: "https://via.placeholder.com/40x40/3B82F6/FFFFFF?text=M"
+        }, {
+            id: "post_2",
+            location: "Gunung Bromo, Jawa Timur",
+            image: "foto3.jpeg",
+            caption: "Menyambut matahari terbit di Bromo — pengalaman magis! 🌄",
+            likes: 42,
+            liked: false,
+            avatar: "c:\Users\Dell\Downloads\WhatsApp Image 2024-11-16 at 02.05.42.jpeg"
+        }];
+
+        let currentPostIndex = 0;
+
+        function toggleLike(button, index) {
+            const heart = button.querySelector('.heart');
+            const likeCountEl = button.closest('article').querySelector('.like-count');
+            const post = posts[index];
+
+            heart.classList.add('heart-animation');
+            likeCountEl.classList.add('updated');
+
+            if (post.liked) {
+                post.liked = false;
+                post.likes--;
+                heart.textContent = '🤍';
+            } else {
+                post.liked = true;
+                post.likes++;
+                heart.textContent = '❤️';
+            }
+
+            likeCountEl.textContent = `${post.likes} suka`;
+            setTimeout(() => {
+                heart.classList.remove('heart-animation');
+                likeCountEl.classList.remove('updated');
+            }, 600);
+        }
+
+        function toggleModalLike() {
+            const heart = document.querySelector('#modal-like-btn .heart');
+            const likesEl = document.getElementById('modal-likes');
+            const post = posts[currentPostIndex];
+
+            heart.classList.add('heart-animation');
+            likesEl.classList.add('updated');
+
+            if (post.liked) {
+                post.liked = false;
+                post.likes--;
+                heart.textContent = '🤍';
+            } else {
+                post.liked = true;
+                post.likes++;
+                heart.textContent = '❤️';
+            }
+
+            likesEl.textContent = `${post.likes} suka`;
+            setTimeout(() => likesEl.classList.remove('updated'), 600);
+        }
+
+        function openModal(index) {
+            currentPostIndex = index;
+            const post = posts[index];
+            document.getElementById('modal-photo').src = post.image;
+            document.getElementById('modal-location').textContent = post.location;
+            document.getElementById('modal-caption').textContent = post.caption;
+            document.getElementById('modal-likes').textContent = `${post.likes} suka`;
+            document.getElementById('modal-avatar').src = post.avatar;
+            document.querySelector('#modal-like-btn .heart').textContent = post.liked ? '❤️' : '🤍';
+            document.getElementById('photo-modal').classList.remove('hidden');
+        }
+
+        function closeModal() {
+            document.getElementById('photo-modal').classList.add('hidden');
+        }
+
+        function nextPhoto() {
+            currentPostIndex = (currentPostIndex + 1) % posts.length;
+            openModal(currentPostIndex);
+        }
+
+        function prevPhoto() {
+            currentPostIndex = (currentPostIndex - 1 + posts.length) % posts.length;
+            openModal(currentPostIndex);
+        }
+
+        function addComment() {
+            const input = document.getElementById('comment-input');
+            const val = input.value.trim();
+            if (!val) return;
+            const div = document.createElement('div');
+            div.textContent = val;
+            div.className = 'text-sm text-gray-800';
+            document.getElementById('comments-list').appendChild(div);
+            input.value = '';
+        }
+    </script>
+</body>
+
+</html>
